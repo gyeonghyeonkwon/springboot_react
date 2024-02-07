@@ -1,6 +1,12 @@
-
+import { json } from "react-router-dom";
+import axios from 'axios';
 
 function Main() {
+  
+    // axios.get('http://localhost:8090/api/v1/articles')
+    // .then(function(response) {
+    //   console.log(response)
+    // });
   
   return (
 
