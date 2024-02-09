@@ -26,7 +26,7 @@ const Write = () => {
       console.log('글 생성 성공:', response.data);
       // 글 생성 후 다음 단계로 이동하거나 필요한 작업을 수행합니다.
     } catch (error) {
-      console.error('글 생성 실패:', error);
+      console.error('글 생성 실패!:', error);
     }
   };
 
