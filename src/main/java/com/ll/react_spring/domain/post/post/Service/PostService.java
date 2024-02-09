@@ -41,12 +41,3 @@ public class PostService {
 
 
 
-//        return posts.stream()
-//                .map(post -> PostDto.builder()
-//                        .id(post.getId())
-//                        .title(post.getTitle())
-//                        .content(post.getContent())
-//                        .createDate(post.getCreateDate())
-//                        .modifyDate(post.getModifyDate())
-//                        .build())
-//                .collect(Collectors.toList());

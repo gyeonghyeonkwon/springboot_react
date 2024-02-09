@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
+ 
+
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -31,21 +34,30 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input 
-        type="text" 
+    
+    <div style={{ 
+      display: 'flex', justifyContent: 'center', alignItems: 'center', 
+      width: '100%', height: '100vh'
+      }}>
+      <form style={{ display:'flex', flexDirection:'column'}} onSubmit={handleSubmit}>
+      <label>id</label>
+      <input className="input input-bordered w-full max-w-xs"
+        type="username" 
         value={username} 
         onChange={(e) => setUsername(e.target.value)} 
         placeholder="Username" 
       />
-      <input 
+      <label>pw</label>
+      <input className="input input-bordered w-full max-w-xs"
         type="password" 
         value={password} 
         onChange={(e) => setPassword(e.target.value)} 
         placeholder="Password" 
       />
+      <br />
       <button className="btn btn-primary" type="submit">Submit</button>
     </form>
+    </div>
   );
 };
 export default Login;

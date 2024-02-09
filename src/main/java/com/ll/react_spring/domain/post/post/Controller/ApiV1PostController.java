@@ -4,6 +4,8 @@ import com.ll.react_spring.domain.post.post.Entity.Post;
 import com.ll.react_spring.domain.post.post.Service.PostService;
 import com.ll.react_spring.domain.post.post.dto.PostDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,10 +18,11 @@ public class ApiV1PostController {
     private final PostService postService;
 
     @PostMapping("/post")
-    public Post create(@RequestBody PostDto postDto) {
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Post> create(@RequestBody PostDto postDto) {
 
 
-        return postService.createPost(postDto);
+        return  ResponseEntity.ok(postService.createPost(postDto));
     }
 
     @GetMapping("/post/list")
