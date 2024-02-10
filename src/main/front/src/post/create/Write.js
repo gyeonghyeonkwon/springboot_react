@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 
 const Write = () => {
 
@@ -17,15 +17,28 @@ const Write = () => {
     });
   };
 
+ 
+  //저장 버튼을 눌렀을때 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if(!title.trim()) {
+      alert("제목을 입력해주세요.");
+      return;
+    }
+
+    if(!content.trim()) {
+      alert("내용을 입력해주세요.");
+      return;
+    }
+    
     try {
-      const response = await axios.post('/api/v1/post', formData).then((res) => {
+      const response = await axios.post('/api/v1/post', formData)
         alert('등록되었습니다.');
-      });
-      console.log('글 생성 성공:', response.data);
-      // 글 생성 후 다음 단계로 이동하거나 필요한 작업을 수행합니다.
-    } catch (error) {
+        console.log('글 생성 성공:', response.data);
+        // // 글 생성 후 다음 단계로 이동하거나 필요한 작업을 수행합니다.
+      }
+     catch (error) {
       console.error('글 생성 실패!:', error);
     }
   };

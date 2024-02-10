@@ -3,6 +3,7 @@ package com.ll.react_spring.domain.post.post.Controller;
 import com.ll.react_spring.domain.post.post.Entity.Post;
 import com.ll.react_spring.domain.post.post.Service.PostService;
 import com.ll.react_spring.domain.post.post.dto.PostDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class ApiV1PostController {
 
     @PostMapping("/post")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Post> create(@RequestBody PostDto postDto) {
+    public ResponseEntity<Post> create(@Valid @RequestBody PostDto postDto) {
 
 
         return  ResponseEntity.ok(postService.createPost(postDto));
