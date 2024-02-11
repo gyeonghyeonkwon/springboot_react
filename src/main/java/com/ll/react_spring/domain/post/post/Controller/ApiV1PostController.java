@@ -27,7 +27,6 @@ public class ApiV1PostController {
     }
 
     @GetMapping("/post/list")
-
     public List<PostDto> list(){
 
         return  postService.getPostList();

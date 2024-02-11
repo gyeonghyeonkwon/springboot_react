@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import BasicLayout from '../../layouts/BasicLayout';
 
 
  
-
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -57,6 +57,7 @@ const Login = () => {
       <button className="btn btn-primary" type="submit">Submit</button>
     </form>
     </div>
+    
   );
 };
 export default Login;
