@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function NaviGationBar() {
   return (
@@ -12,14 +13,14 @@ function NaviGationBar() {
           </svg>
         </div>
         <ul tabIndex="0" className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-          <li><a>Homepage</a></li>
-          <li><a>Portfolio</a></li>
+          <li><Link to={'/post/list'}>글 리스트</Link></li>
+          <li><Link to={'/post/write'}>글 작성</Link></li>
           <li><a>About</a></li>
         </ul>
       </div>
     </div>
     <div className="navbar-center">
-      <a className="btn btn-ghost text-xl">daisyUI</a>
+      <Link to={'/'} className="btn btn-ghost text-xl">daisyUI</Link>
     </div>
     <div className="navbar-end">
       <button className="btn btn-ghost btn-circle">

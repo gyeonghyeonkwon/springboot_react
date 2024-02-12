@@ -1,5 +1,6 @@
 import axios from "axios";
 import {  useState } from "react";
+import BasicLayout from "../../layouts/BasicLayout";
 
 const Write = () => {
 
@@ -45,7 +46,7 @@ const Write = () => {
 
 
   return (
-
+<BasicLayout>
 <div>
       <div>
         <span>제목</span>
@@ -69,6 +70,7 @@ const Write = () => {
         <button onClick={handleSubmit}>저장</button>
       </div>
     </div>
+    </BasicLayout>
   );
 };
 

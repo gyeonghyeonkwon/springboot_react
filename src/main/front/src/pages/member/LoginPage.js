@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
 import axios from 'axios';
-import BasicLayout from '../../layouts/BasicLayout';
+import React, { useState } from 'react';
 
 
- 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

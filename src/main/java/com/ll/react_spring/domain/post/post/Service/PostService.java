@@ -17,8 +17,10 @@ public class PostService {
 
     private final PostRepository postRepository;
 
+
+
     @Transactional
-    public Post createPost(PostDto postDto) {
+    public Post createPost(final PostDto postDto) {
 
        return postRepository.save(postDto.toEntity());
     }
@@ -36,8 +38,22 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
+    public PostDto getPost(final Long id) {
+
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("글을 찾 을 수 없습니다."));
+
+        return PostDto.builder()
+                .id(post.getId())
+                .title(post.getTitle())
+                .content(post.getContent())
+                .createDate(post.getCreateDate())
+                .modifyDate(post.getModifyDate())
+                .build();
 
     }
+
+}
 
 
 

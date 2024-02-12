@@ -1,5 +1,6 @@
 package com.ll.react_spring.domain.post.post.Entity;
 
+import com.ll.react_spring.domain.post.post.dto.PostDto;
 import com.ll.react_spring.global.jpa.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -18,4 +19,13 @@ public class Post extends BaseEntity {
     private String title;
 
     private String content;
+
+
+    public PostDto toDto(Post post){
+
+        return PostDto.builder()
+                .title(post.getTitle())
+                .content(post.getContent())
+                .build();
+    }
 }

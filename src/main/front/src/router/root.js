@@ -1,7 +1,7 @@
 import { Suspense, lazy } from "react";
 const { createBrowserRouter } = require("react-router-dom");
 
-const Loading = <span class="loading loading-spinner text-secondary"></span> //로딩
+const Loading = <span className="loading loading-spinner loading-lg"></span>//로딩
 
 const Main = lazy(() => import("../pages/MainPage")) //보여질 메인페이지 
 const Login = lazy(() => import("../pages/member/LoginPage")) //보여질 로그인 페이지 

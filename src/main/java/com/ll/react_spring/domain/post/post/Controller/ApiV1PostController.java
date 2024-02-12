@@ -23,12 +23,31 @@ public class ApiV1PostController {
     public ResponseEntity<Post> create(@Valid @RequestBody PostDto postDto) {
 
 
-        return  ResponseEntity.ok(postService.createPost(postDto));
+        return ResponseEntity.ok(postService.createPost(postDto));
     }
 
     @GetMapping("/post/list")
-    public List<PostDto> list(){
+    public List<PostDto> list() {
 
-        return  postService.getPostList();
+        return postService.getPostList();
+    }
+
+    @GetMapping("post/detail/{id}")
+    public PostDto detail(@PathVariable Long id){
+
+        return this.postService.getPost(id);
+
+    }
+
+    @GetMapping("post/modify/{id}")
+    public PostDto showModify(@PathVariable Long id) {
+
+        PostDto postDto = postService.getPost(id);
+
+
+        return null;
     }
 }
+
+
+

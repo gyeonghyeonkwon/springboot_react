@@ -1,6 +1,7 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import BasicLayout from "../../layouts/BasicLayout";
 
 const PostList = () => {
   const [PostList, setList] = useState([]);
@@ -20,7 +21,7 @@ const PostList = () => {
 
 
   return (
-
+<BasicLayout>
 <div className="overflow-x-auto">
       <table className="table">
         {/* 테이블 헤더 */}
@@ -29,6 +30,7 @@ const PostList = () => {
             <th>번호</th>
             <th>제목</th>
             <th>내용</th>
+            <th>생성일</th>
           </tr>
         </thead>
         <tbody>
@@ -37,13 +39,14 @@ const PostList = () => {
               <td>{postDto.id}</td>
               <td>{postDto.title}</td>
               <td>{postDto.content}</td>
-              <td>{postDto.createdDate}</td>
+              <td>{postDto.createDate}</td>
               
             </tr>
           ))}
         </tbody>
       </table>
     </div>
+    </BasicLayout>
   );
 };
 
