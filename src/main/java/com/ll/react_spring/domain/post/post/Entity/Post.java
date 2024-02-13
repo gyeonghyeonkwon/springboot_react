@@ -24,8 +24,11 @@ public class Post extends BaseEntity {
     public PostDto toDto(Post post){
 
         return PostDto.builder()
+                .id(post.getId())
                 .title(post.getTitle())
                 .content(post.getContent())
+                .modifyDate(post.getModifyDate())
+                .createDate(post.getCreateDate())
                 .build();
     }
 }

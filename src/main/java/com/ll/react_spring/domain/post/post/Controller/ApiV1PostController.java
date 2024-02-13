@@ -39,13 +39,15 @@ public class ApiV1PostController {
 
     }
 
-    @GetMapping("post/modify/{id}")
-    public PostDto showModify(@PathVariable Long id) {
+    @PutMapping("post/modify/{id}")
+    public PostDto showModify(@PathVariable Long id , @RequestBody PostDto postDto) {
 
-        PostDto postDto = postService.getPost(id);
+        return postService.modifyPost(postDto , id);
+    }
+    @DeleteMapping("post/delete/{id}")
+    public void deletePost( @PathVariable Long id ) {
 
-
-        return null;
+         postService.deletePost(id);
     }
 }
 
