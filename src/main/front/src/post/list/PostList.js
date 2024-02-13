@@ -12,7 +12,7 @@ const PostList = () => {
         const response = await axios.get('http://127.0.0.1:8090/api/v1/post/list');
         setList(response.data); // 서버에서 받은 데이터를 상태에 설정
       } catch (error) {
-        console.error('Error fetching post list:', error);
+        console.error('글을 불러 올 수 없습니다 :', error);
       }
     };
 

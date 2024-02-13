@@ -38,9 +38,15 @@ public class ApiV1PostController {
         return this.postService.getPost(id);
 
     }
+    @GetMapping("post/modify/{id}")
+    public PostDto showModify (@PathVariable Long id ) {
+
+        return postService.getPost(id);
+//api/v1/post/modify/{id}
+    }
 
     @PutMapping("post/modify/{id}")
-    public PostDto showModify(@PathVariable Long id , @RequestBody PostDto postDto) {
+    public PostDto putModify(@PathVariable Long id , @RequestBody PostDto postDto) {
 
         return postService.modifyPost(postDto , id);
     }

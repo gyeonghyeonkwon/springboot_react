@@ -20,7 +20,7 @@ function NaviGationBar() {
         </div>
         {isDropdownOpen && (
         <ul tabIndex="0" className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-          <li><Link to={'/post/list'}>글 리스트</Link></li>
+          <li><Link to={'/post/list'}>글 목록</Link></li>
           <li><Link to={'/post/write'}>글 작성</Link></li>
         </ul>
         )}

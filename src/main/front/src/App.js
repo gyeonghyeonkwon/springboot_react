@@ -1,11 +1,11 @@
+import { RouterProvider } from "react-router-dom";
 import './App.css';
-import './index.css'
-import { RouterProvider} from "react-router-dom";
+import './index.css';
 import root from './router/root';
     
     function App() {
    return (
-    <RouterProvider router={root}></RouterProvider> //라우터 , root.js
+    <RouterProvider router={root}></RouterProvider>//라우터 , root.js
 );
 }
 

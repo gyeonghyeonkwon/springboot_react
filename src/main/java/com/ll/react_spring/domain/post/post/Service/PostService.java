@@ -59,7 +59,7 @@ public class PostService {
     public PostDto modifyPost( PostDto postDto ,  Long id ) {
 
         Post post = postRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Post not found with id: " + id));
+                .orElseThrow(() -> new RuntimeException("글을 찾 을 수 없습니다 " + id));
 
 
         post.setTitle(postDto.getTitle());

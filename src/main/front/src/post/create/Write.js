@@ -37,7 +37,8 @@ const Write = () => {
       const response = await axios.post('/api/v1/post', formData)
         alert('등록되었습니다.');
         console.log('글 생성 성공:', response.data);
-        // // 글 생성 후 다음 단계로 이동하거나 필요한 작업을 수행합니다.
+        // 글 생성 후 다음 단계로 이동하거나 필요한 작업을 수행합니다.
+        window.location.href = "/"; //글 저장 후 리스트로 이동
       }
      catch (error) {
       console.error('글 생성 실패!:', error);

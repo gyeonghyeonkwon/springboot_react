@@ -1,35 +1,37 @@
 import { Suspense, lazy } from "react";
-const { createBrowserRouter } = require("react-router-dom");
+const { createBrowserRouter, Navigate } = require("react-router-dom");
 
 const Loading = <span className="loading loading-spinner loading-lg"></span>//로딩
 
-const Main = lazy(() => import("../pages/MainPage")) //보여질 메인페이지 
 const Login = lazy(() => import("../pages/member/LoginPage")) //보여질 로그인 페이지 
-const List = lazy(() => import("../post/list/PostList")) //보여질 리스트 페이지 
+const PostList = lazy(() => import("../post/list/PostList")) //보여질 리스트 페이지 
 const Write = lazy(() => import("../post/create/Write")) //보여질 글작성 페이지 
+const PostModify = lazy(() => import("../post/modify/PostModify"))
 
 const root = createBrowserRouter ([
   
   {
-    path: "",
-    element: <Suspense fallback={Loading}><Main/></Suspense>
+    path: '',
+    element: <Navigate replace={true} to= {'post/list'}/> //리다이렉션
   },
   {
-    path: "member/login", //이동할 경로 
+    path: "member/login", //로그인 페이지 이동 
     element: <Suspense fallback={Loading}><Login/></Suspense>
   },
   {
-    path: "post/list", //이동할 경로 
-    element: <Suspense fallback={Loading}><List/></Suspense>
+    path: "post/list", //글 리스트 이동 
+    element: <Suspense fallback={Loading}><PostList/></Suspense>
   },
   {
-    path: "post/write", //이동할 경로 
+    path: "post/write", //글 작성 이동
     element: <Suspense fallback={Loading}><Write/></Suspense>
   },
   {
-    path: "post/modify", //이동할 경로 
-    element: <Suspense fallback={Loading}><Write/></Suspense>
+    path: 'post/modify/:id',
+    element: <Suspense fallback={Loading}><PostModify/></Suspense>
+    
   }
+
 ])
 
 export default root;
