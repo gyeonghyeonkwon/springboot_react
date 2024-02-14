@@ -7,6 +7,9 @@ const Login = lazy(() => import("../pages/member/LoginPage")) //보여질 로그
 const PostList = lazy(() => import("../post/list/PostList")) //보여질 리스트 페이지 
 const Write = lazy(() => import("../post/create/Write")) //보여질 글작성 페이지 
 const PostModify = lazy(() => import("../post/modify/PostModify"))
+const Detail = lazy(() => import("../post/detail/Detail"))
+
+
 
 const root = createBrowserRouter ([
   
@@ -27,10 +30,16 @@ const root = createBrowserRouter ([
     element: <Suspense fallback={Loading}><Write/></Suspense>
   },
   {
-    path: 'post/modify/:id',
+    path: 'post/modify/:id', //글 수정 이동
     element: <Suspense fallback={Loading}><PostModify/></Suspense>
     
+  },
+  {
+    path: 'post/detail/:id', //글 상세 이동 
+    element: <Suspense fallback={Loading}><Detail/></Suspense>
+    
   }
+
 
 ])
 

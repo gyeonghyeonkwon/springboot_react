@@ -8,7 +8,7 @@ const Write = () => {
     title: '',
     content: '',
   });
-  const { title,  content } =  formData;
+  const { title,  content } =  formData; //비구조 할당
 
   const handleChange = (e) => {
     const { name, value } = e.target;

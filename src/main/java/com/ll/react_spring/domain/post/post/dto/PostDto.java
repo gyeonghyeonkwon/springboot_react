@@ -1,5 +1,6 @@
 package com.ll.react_spring.domain.post.post.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ll.react_spring.domain.post.post.Entity.Post;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
@@ -17,10 +18,10 @@ public class PostDto {
     @NotBlank
     private final String content;
 
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
     private final LocalDateTime createDate;
 
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
     private final LocalDateTime modifyDate;
 
     //엔티티
