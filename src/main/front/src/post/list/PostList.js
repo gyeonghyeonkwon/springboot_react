@@ -2,10 +2,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import BasicLayout from "../../layouts/BasicLayout";
+import { Link, useParams } from "react-router-dom";
 
 const PostList = () => {
   const [PostList, setList] = useState([]);
-
+  const {id} = useParams;
   useEffect(() => {
     const getPostList = async () => {
       try {
@@ -17,7 +18,7 @@ const PostList = () => {
     };
 
     getPostList(); // 컴포넌트가 마운트될 때 게시글 목록을 가져오는 함수 호출
-  }, []); // 빈 배열을 두어 한 번만 호출되도록 설정
+  }, [id]); // 빈 배열을 두어 한 번만 호출되도록 설정
 
 
   return (
@@ -37,7 +38,7 @@ const PostList = () => {
           {PostList.map((postDto) => (
             <tr key={postDto.id}>
               <td>{postDto.id}</td>
-              <td>{postDto.title}</td>
+              <td> <Link to={`/post/detail/${postDto.id}`}>{postDto.title}</Link></td>            
               <td>{postDto.content}</td>
               <td>{postDto.createDate}</td>
               

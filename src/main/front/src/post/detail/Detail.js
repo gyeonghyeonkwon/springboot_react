@@ -1,30 +1,62 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 
 const Detail = () => {
   const {id} = useParams(); //url id 매핑
-  const [title , setTitle] = useState({});
-  const [content , setContent] = useState({});
-
+  const navigate = useNavigate();
+  const [title , setTitle] = useState('');
+  const [content , setContent] = useState('');
+  const [createDate , setCreateDate] = useState('');
   useEffect(() => {
     axios.get(`http://127.0.0.1:8090/api/v1/post/detail/${id}`).then((response)=> {
       setTitle(response.data.title);
       setContent(response.data.content);
+      setCreateDate(new Date(response.data.createDate).toLocaleString()); //날짜 포맷
     })
+      .catch((error) => {
+          console.log('상세 글을 불러올수없습니다' , error)
+      });
+  }, [id]);
 
-  }, []);
+  //삭제
+  const deleteWrite = () =>{
+    if (window.confirm('게시글을 삭제하시겠습니까?')) {
+     axios.delete(`http://127.0.0.1:8090/api/v1/post/delete/${id}`).then((response) => {
+
+     alert('삭제되었습니다');
+     navigate('/post/list');
+     })
+    
+     .catch((error) => {
+        console.log('삭제 요청이 실패하였습니다',error)
+     });
+    }
+  };
   return (
-    <div>
-        <span>제목</span>
-        <input type="text" name="title" value={title}  />
+    
+    <div >
+            <h1>글 상세 페이지</h1>
+            <br />
+            <h2>제목</h2>
+            <input type ='text' value={title} readOnly></input>
+            <br />
+            <h2>내용</h2>
+            <input type ='text' value={content} readOnly></input>
+            <br />
+            <h2>작성일</h2>
+            <input type ='text' value={createDate} readOnly></input>
+            <br />
+            <button onClick={()=>{ navigate('/post/list') }}>뒤로가기</button>
+            <button onClick={()=>{ navigate(`/post/modify/${id}`) }}>수정하기</button>
+            <button onClick={deleteWrite}>삭제하기</button>
+            </div>
+
+            
       
 
-<div>
-<span>내용</span>
-<input type="text" name="content" value={content}  />
-</div>
-</div>
+
+
 
   );
 }
