@@ -6,7 +6,7 @@ import { Link, useParams } from "react-router-dom";
 
 const PostList = () => {
   const [PostList, setList] = useState([]);
-  const {id} = useParams;
+  const {id} = useParams();
   useEffect(() => {
     const getPostList = async () => {
       try {

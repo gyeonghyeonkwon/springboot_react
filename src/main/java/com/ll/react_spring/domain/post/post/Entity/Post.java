@@ -1,9 +1,11 @@
 package com.ll.react_spring.domain.post.post.Entity;
 
+import com.ll.react_spring.domain.member.member.Entity.Member;
 import com.ll.react_spring.domain.post.post.dto.PostDto;
 import com.ll.react_spring.global.jpa.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -20,6 +22,8 @@ public class Post extends BaseEntity {
 
     private String content;
 
+    @ManyToOne
+    private Member member;
 
     public PostDto toDto(Post post){
 

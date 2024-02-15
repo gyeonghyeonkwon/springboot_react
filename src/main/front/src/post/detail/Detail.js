@@ -38,18 +38,21 @@ const Detail = () => {
     <div >
             <h1>글 상세 페이지</h1>
             <br />
-            <h2>제목</h2>
-            <input type ='text' value={title} readOnly></input>
+            <h2 >제목</h2>
+            <input type ='text' placeholder="Type here" className="input input-bordered w-full max-w-xs" value={title} readOnly></input>
+            <br />
             <br />
             <h2>내용</h2>
-            <input type ='text' value={content} readOnly></input>
+            <input type ='text' className="input input-bordered w-full max-w-xs" value={content} readOnly></input>
+            <br />
             <br />
             <h2>작성일</h2>
-            <input type ='text' value={createDate} readOnly></input>
+            <input type ='text' className="input input-bordered w-full max-w-xs" value={createDate} readOnly></input>
             <br />
-            <button onClick={()=>{ navigate('/post/list') }}>뒤로가기</button>
-            <button onClick={()=>{ navigate(`/post/modify/${id}`) }}>수정하기</button>
-            <button onClick={deleteWrite}>삭제하기</button>
+            <br />
+            <button className="btn btn-primary" onClick={()=>{ navigate('/post/list') }}>뒤로가기</button>
+            <button className="btn btn-primary" onClick={()=>{ navigate(`/post/modify/${id}`) }}>수정하기</button>
+            <button className="btn btn-primary" onClick={deleteWrite}>삭제하기</button>
             </div>
 
             

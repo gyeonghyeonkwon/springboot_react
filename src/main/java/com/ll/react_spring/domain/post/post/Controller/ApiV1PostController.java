@@ -42,7 +42,6 @@ public class ApiV1PostController {
     public PostDto showModify (@PathVariable Long id ) {
 
         return postService.getPost(id);
-//api/v1/post/modify/{id}
     }
 
     @PutMapping("post/modify/{id}")
@@ -53,7 +52,7 @@ public class ApiV1PostController {
     @DeleteMapping("post/delete/{id}")
     public void deletePost( @PathVariable Long id ) {
 
-         postService.deletePost(id);
+         postService.deletePost(id); //삭제
     }
 }
 

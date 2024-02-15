@@ -49,28 +49,26 @@ const Write = () => {
   return (
 <BasicLayout>
 <div>
-      <div>
-        <span>제목</span>
-        <input type="text" name="title" value={title} onChange={handleChange} />
+      
+        <label>제목</label>
+        <input type="text" placeholder="제목을 입력해주세요" className="input input-bordered w-full max-w-xs" name="title" value={title} onChange={handleChange} />
       </div>
       <br />
       
       <br />
       <div>
-        <span>내용</span>
-        <textarea
-          name="content"
-          cols="30"
-          rows="10"
+        <label>내용</label>
+        <textarea className="textarea textarea-bordered w-full max-w-xs" placeholder="내용을 입력해주세요"
+
           value={content}
           onChange={handleChange}
         ></textarea>
       </div>
       <br />
       <div>
-        <button onClick={handleSubmit}>저장</button>
+        <button className="btn btn-primary"onClick={handleSubmit}>저장</button>
       </div>
-    </div>
+    
     </BasicLayout>
   );
 };
