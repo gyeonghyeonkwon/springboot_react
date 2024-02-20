@@ -59,10 +59,10 @@ const Write = () => {
       <div>
         <label>내용</label>
         <textarea className="textarea textarea-bordered w-full max-w-xs" placeholder="내용을 입력해주세요"
-
+          name="content"
           value={content}
-          onChange={handleChange}
-        ></textarea>
+          onChange={handleChange}>
+       </textarea>
       </div>
       <br />
       <div>

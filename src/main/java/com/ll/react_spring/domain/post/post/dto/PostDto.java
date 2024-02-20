@@ -2,13 +2,11 @@ package com.ll.react_spring.domain.post.post.dto;
 
 import com.ll.react_spring.domain.post.post.Entity.Post;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
-@Builder
 public class PostDto {
 
     private final Long id;
@@ -17,19 +15,25 @@ public class PostDto {
     @NotBlank
     private final String content;
 
+    private final Long memberId;
+
+    private final String memberName;
+
     private final LocalDateTime createDate;
 
     private final LocalDateTime modifyDate;
 
-    //엔티티
-    public Post toEntity()  {
-        return Post.builder()
-                .title(title)
-                .content(content)
-                .build();
 
+
+    public PostDto (Post post){
+
+       this.id = post.getId();
+       this.createDate= post.getCreateDate();
+       this.modifyDate = post.getModifyDate();
+       this.memberId = post.getMember().getId();
+       this.memberName = post.getMember().getName();
+       this.title = post.getTitle();
+       this.content=post.getContent();
     }
-
-
 
 }

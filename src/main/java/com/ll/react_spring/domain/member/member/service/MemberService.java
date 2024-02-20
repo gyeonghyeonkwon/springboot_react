@@ -2,11 +2,19 @@ package com.ll.react_spring.domain.member.member.service;
 
 import com.ll.react_spring.domain.member.member.Entity.Member;
 import com.ll.react_spring.domain.member.member.Repository.MemberRepository;
+import com.ll.react_spring.global.rsData.RsData;
+import com.ll.react_spring.global.util.JwtUtil;
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
     @Service
     @RequiredArgsConstructor
@@ -20,17 +28,50 @@ import java.util.Optional;
             return memberRepository.findByUsername(username);
         }
 
-        @Transactional
-        public void join(String username, String password) {
-            Member member = Member.builder()
-                    .username(username)
-                    .password(passwordEncoder.encode(password))
-                    .build();
-
-            memberRepository.save(member);
+        public Optional<Member> findById(Long id) {
+            return memberRepository.findById(id);
         }
 
-        public boolean passwordMatches(Member member, String password) {
-            return passwordEncoder.matches(password, member.getPassword());
+        @Transactional
+        public RsData<Member> join(String username, String password , String nickname) {
+            Member member = Member.builder()
+                    .username(username)
+                    .nickname(nickname)
+                    .password(passwordEncoder.encode(password))
+                    .build();
+            memberRepository.save(member);
+
+          return  RsData.of("200", "%s 님 가입을 환영합니다 ".formatted( username) , member);
+        }
+
+        public User getUserFromApiKey (String apiKey) {
+
+            Claims claims = JwtUtil.decode(apiKey);
+
+            Map<String, Object> data = (Map<String, Object>) claims.get("data");
+
+            String id = (String) data.get("id");
+
+            List<? extends GrantedAuthority> authorities = ((List<String>) data.get("authorities"))
+                    .stream()
+                    .map(SimpleGrantedAuthority::new)
+                    .toList();
+
+            return new User( id , "" , authorities);
+        }
+
+
+        public RsData<Member> checkUsernameAndPassword(String username ,  String password) {
+
+           Member member = memberRepository.findByUsername(username).orElseThrow(()
+
+                   ->new IllegalArgumentException("아이디를 찾을수없습니다 "));
+
+            if(!passwordEncoder.matches(password , member.getPassword())) {
+
+                throw new IllegalArgumentException("비밀번호가 일치 하지 않습니다.");
+            }
+
+            return RsData.of("200" , "로그인 성공" , member);
         }
     }

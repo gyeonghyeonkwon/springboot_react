@@ -6,6 +6,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -19,7 +23,28 @@ public class Member extends BaseEntity {
     @Column(unique = true)
     private String username;
 
+    private String nickname;
+
     private String password;
 
 
+    public String getName () {
+        return username;
+    }
+
+    /**
+     * 유저 권 한
+     */
+    @SuppressWarnings("JpaAttributeTypeInspection")
+    public List<? extends GrantedAuthority> getAuthorities() {
+        return getAuthoritiesAsStrList()
+                .stream()
+                .map(SimpleGrantedAuthority::new)
+                .toList();
+    }
+
+    @SuppressWarnings("JpaAttributeTypeInspection")
+    public List<String> getAuthoritiesAsStrList() {
+        return List.of("ROLE_MEMBER");
+    }
 }

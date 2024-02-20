@@ -35,12 +35,12 @@ const PostList = () => {
           </tr>
         </thead>
         <tbody>
-          {PostList.map((postDto) => (
-            <tr key={postDto.id}>
-              <td>{postDto.id}</td>
-              <td> <Link to={`/post/detail/${postDto.id}`}>{postDto.title}</Link></td>            
-              <td>{postDto.content}</td>
-              <td>{postDto.createDate}</td>
+          {PostList.map((item) => (
+            <tr key={item.id}>
+              <td>{item.id}</td>
+              <td> <Link to={`/post/detail/${item.id}`}>{item.title}</Link></td>            
+              <td>{item.content}</td>
+              <td>{item.createDate}</td>
               
             </tr>
           ))}
