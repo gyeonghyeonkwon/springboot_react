@@ -33,8 +33,12 @@ public class MemberController {
         Long id = member.getId(); //멤버 아이디
 
         String accessToken = JwtUtil.encode(
+
+                60 * 60 * 24 * 365, //액세스 토큰 수명 시간 1년 으로 지정 (임시)
+
                 Map.of(
                         "id", id.toString(),
+                        "username" , member.getUsername(),
                         "authorities", member.getAuthoritiesAsStrList()
                 )
         );

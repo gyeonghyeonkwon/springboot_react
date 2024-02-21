@@ -1,13 +1,14 @@
 package com.ll.react_spring.global.rq;
 
 import com.ll.react_spring.domain.member.member.Entity.Member;
-import com.ll.react_spring.domain.member.member.service.MemberService;
+import com.ll.react_spring.global.config.SecurityUser;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -17,27 +18,72 @@ import org.springframework.web.context.annotation.RequestScope;
 public class Rq {
     private final HttpServletRequest request;
     private final HttpServletResponse response;
-    private final MemberService memberService;
     private final EntityManager entityManager;
+
     private Member member;
+    private SecurityUser securityUser;
 
-    /**
-     *
-     * 스프링 시큐리티에서 로그인 한 아이디를 얻는다
-     */
+    public boolean isAdmin() {
+        if (isLogout()) return false;
+
+        return getSecurityUser()
+                .getAuthorities()
+                .stream()
+                .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
+    }
+
+    public boolean isLogin() {
+        return getSecurityUser() != null;
+    }
+
+    public boolean isLogout() {
+        return !isLogin();
+    }
+
+    public SecurityUser getSecurityUser() {
+        if (securityUser == null) {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication == null) return null;
+            Object principal = authentication.getPrincipal();
+            if (principal == null) return null;
+            securityUser = (SecurityUser) principal;
+        }
+
+        return securityUser;
+    }
+
     public Member getMember() {
-        if (member == null) {
-            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            long memberId = Long.parseLong(user.getUsername());
+        if (isLogout()) return null;
 
-            member = entityManager.getReference(Member.class , memberId);
-            //Member member = new Member(memberId); 와 같다
+        if (member == null) {
+            member = entityManager.find(Member.class, getSecurityUser().getId());
         }
 
         return member;
     }
 
-    public String getHeader(String name) {
-        return request.getHeader(name);
+
+    /**
+     *
+     */
+    public String getHeader(String name , String defaultValue ) {
+
+        String value =  request.getHeader(name);
+
+        if (value == null ) {
+            return  defaultValue;
+        }
+        return value;
+    }
+
+    public void setAuthentication(SecurityUser  user) {
+
+        Authentication auth = new UsernamePasswordAuthenticationToken(
+                user,
+                user.getPassword(),
+                user.getAuthorities()
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(auth);
     }
 }

@@ -2,13 +2,13 @@ package com.ll.react_spring.domain.member.member.service;
 
 import com.ll.react_spring.domain.member.member.Entity.Member;
 import com.ll.react_spring.domain.member.member.Repository.MemberRepository;
+import com.ll.react_spring.global.config.SecurityUser;
 import com.ll.react_spring.global.rsData.RsData;
 import com.ll.react_spring.global.util.JwtUtil;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,20 +44,21 @@ import java.util.Optional;
           return  RsData.of("200", "%s 님 가입을 환영합니다 ".formatted( username) , member);
         }
 
-        public User getUserFromApiKey (String apiKey) {
+        public SecurityUser getUserFromApiKey (String apiKey) {
 
             Claims claims = JwtUtil.decode(apiKey);
 
             Map<String, Object> data = (Map<String, Object>) claims.get("data");
 
-            String id = (String) data.get("id");
+            long id = Long.parseLong((String) data.get("id"));
+            String username = ((String) data.get("username"));
 
             List<? extends GrantedAuthority> authorities = ((List<String>) data.get("authorities"))
                     .stream()
                     .map(SimpleGrantedAuthority::new)
                     .toList();
 
-            return new User( id , "" , authorities);
+            return new SecurityUser( id , username ,  "" , authorities);
         }
 
 
